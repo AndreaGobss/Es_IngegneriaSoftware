@@ -4,13 +4,13 @@ public class EsGestioneParcheggio {
     public static void main(String[] args) {
         Parcheggio parcheggio = new Parcheggio();
 
-        Veicolo v1 = new Veicolo("di0m3rd4", "Macchina", "due");
-        Veicolo v2 = new Veicolo("f4ncul01fr0c1", "Camper", "troie");
+        Veicolo v1 = new Veicolo("111111", "Macchina", "due");
+        Veicolo v2 = new Veicolo("222222", "Camper", "salame");
 
-        Cliente c1 = new Cliente("1", "Merdessandro", v1);
-        Cliente c2 = new Cliente("2", "Zambromerda", v2);
+        Cliente c1 = new Cliente("1", "Pietro", v1);
+        Cliente c2 = new Cliente("2", "Pietrino", v2);
 
-        GestoreParcheggio gestore = new GestoreParcheggio("Coglione", 1);
+        GestoreParcheggio gestore = new GestoreParcheggio("Narancia", 1);
 
         gestore.aggiungiCliente(c1, parcheggio);
         gestore.aggiungiCliente(c2, parcheggio);
@@ -162,7 +162,7 @@ class Parcheggio{
         for(PostoAuto p : posti){
             if(p.getNumeroPosto() == (numeroPosto)){
                 p.liberaPosto();
-                System.out.println("Posto liberato, dio cane");
+                System.out.println("Posto liberato");
             }
         }
     }

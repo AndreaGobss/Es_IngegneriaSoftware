@@ -94,7 +94,7 @@ class Palestra{
 
 public class gestionePalestra {
     public static void main(String[] args) {
-        Istruttore bastardo = new Istruttore("Bastardo Cane", "emailgay", "Stupratore");
+        Istruttore bastardo = new Istruttore("Gianni Cane", "asda", "mao");
         Corso karate = new Corso("Karate", "200 anni", bastardo);
         Iscritto pallino = new Iscritto("Pallino pallone", "nasoidfjun", 0);
 

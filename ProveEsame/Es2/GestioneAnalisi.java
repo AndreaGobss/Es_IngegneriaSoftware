@@ -115,32 +115,32 @@ public class GestioneAnalisi{
     public static void main(String args[]){
         Laboratorio lab = new Laboratorio();
 
-        Analisi cacca = new Analisi("cacca", "misura percentuale cacca nel sangue");
-        Analisi piscia = new Analisi("piscia", "misura percentuale piscia nel sangue");
+        Analisi mao = new Analisi("mao", "misura percentuale mao nel sangue");
+        Analisi bao = new Analisi("bao", "misura percentuale bao nel sangue");
 
-        lab.addAnalisi(cacca);
-        lab.addAnalisi(piscia);
+        lab.addAnalisi(mao);
+        lab.addAnalisi(bao);
 
-        Paziente stronzo = new Paziente("Stronzo Stronzini", 3, 0);
-        Paziente infame = new Paziente("Infame Infamini", 98, 1);
+        Paziente paz1 = new Paziente("Gianni Giannini", 3, 0);
+        Paziente paz2 = new Paziente("Infame Infamini", 98, 1);
 
-        Referto r1 = new Referto(30, stronzo, cacca);
-        Referto r2 = new Referto(40, stronzo, piscia);
-        Referto r3 = new Referto(50, infame, cacca);
-        Referto r4 = new Referto(60, infame, piscia);
+        Referto r1 = new Referto(30, paz1, mao);
+        Referto r2 = new Referto(40, paz1, bao);
+        Referto r3 = new Referto(50, paz2, mao);
+        Referto r4 = new Referto(60, paz2, bao);
 
         lab.registraReferto(r1);
         lab.registraReferto(r2);
         lab.registraReferto(r3);
         lab.registraReferto(r4);
 
-        System.out.println("Referti di Stronzo: ");
-        for(Referto r : lab.getRefertiPaziente(stronzo)){
+        System.out.println("Referti di paz1: ");
+        for(Referto r : lab.getRefertiPaziente(paz1)){
             System.out.println("" + r.getValore() + "" + r.getAnalisi() + "" + r.getPaziente());
         }
 
-        System.out.println("Referti relativi alla cacca: ");
-        for(Referto r : lab.getRefertiAnalisi(cacca)){
+        System.out.println("Referti relativi alla mao: ");
+        for(Referto r : lab.getRefertiAnalisi(mao)){
             System.out.println(r.getValore() + " " + r.getAnalisi() + " " + r.getPaziente());
         }
     }

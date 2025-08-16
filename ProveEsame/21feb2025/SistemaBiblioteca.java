@@ -116,8 +116,8 @@ public class SistemaBiblioteca{
     public static void main(String[] args){
 
         Biblioteca biblioteca = new Biblioteca();
-        Libro libro1 = new Libro("La merda e il piscio", "Franco Culo");
-        Libro libro2 = new Libro("100 ricette con la merda", "Mario Zambrini");
+        Libro libro1 = new Libro("Bau", "Franco Culo");
+        Libro libro2 = new Libro("caac", "Miao");
 
         Utente utente1 = new Utente("Gianni", "Palle", 0);
         StaffBiblioteca staff1 = new StaffBiblioteca("Scroto 2", "sesso", 0);

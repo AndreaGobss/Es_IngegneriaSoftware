@@ -158,10 +158,10 @@ public class GestioneNoleggi {
         SistemaScrotale s = new SistemaScrotale();
 
         Staff staff1 = new Staff("Gianni Banana", 1);
-        Cliente cliente1 = new Cliente("Pietro Scroto", 0);
+        Cliente cliente1 = new Cliente("Pietro Scialbone", 0);
 
-        Film film1 = new Film("La notte della merda");
-        Film film2 = new Film("La notte della merda 2: la diarrea");
+        Film film1 = new Film("La notte della notte");
+        Film film2 = new Film("La notte della notte 2: la notte");
 
         s.aggiungiFilm(film1, staff1);
         s.aggiungiFilm(film2, staff1);
@@ -169,7 +169,7 @@ public class GestioneNoleggi {
             
         s.noleggiaFilm(cliente1, film1);
 
-        System.out.println("Film noleggiati da Scroto: ");
+        System.out.println("Film noleggiati da Pietro: ");
         s.stampaFilmNoleggiatiDa(cliente1);
 
         s.restituisciFilm(cliente1, film1);
