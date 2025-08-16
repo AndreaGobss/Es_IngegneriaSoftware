@@ -1,0 +1,61 @@
+Una palestra vuole sviluppare un software per gestire i propri iscritti, 
+gli istruttori e i corsi settimanali. Ogni Iscritto ha un nome, un numero 
+identificativo e un indirizzo email. Gli Istruttori sono persone che tengono 
+i corsi e hanno una specializzazione.
+
+I Corsi hanno un titolo, una durata in ore, un orario e sono tenuti da un 
+solo Istruttore. Gli iscritti possono prenotarsi a più corsi, e ogni corso
+ può avere più iscritti.
+
+Il personale della palestra deve poter:
+--> Aggiungere e rimuovere corsi
+--> Iscrivere utenti ai corsi
+--> Annullare la prenotazione a un corso
+
+@startuml
+class Persona {
+    - nome : String
+    - email : String
+    + getNome() : String
+    + getEmail() : String
+}
+
+class Iscritto {
+    - id : int
+    + prenotaCorso(corso: Corso) : void
+    + annullaPrenotazione(corso: Corso) : void
+    + getId() : int
+}
+
+class Istruttore {
+    - specializzazione : String
+    + getSpecializzazione() : String
+}
+
+class Corso {
+    - titolo : String
+    - durataOre : int
+    - orario : String
+    - istruttore : Istruttore
+    - iscritti : List<Iscritto>
+    + aggiungiIscritto(iscritto: Iscritto) : void
+    + rimuoviIscritto(iscritto: Iscritto) : void
+    + getTitolo() : String
+}
+
+class Palestra {
+    - corsi : List<Corso>
+    + aggiungiCorso(corso: Corso) : void
+    + rimuoviCorso(corso: Corso) : void
+    + getCorsi() : List<Corso>
+}
+
+Persona <|-- Iscritto
+Persona <|-- Istruttore
+
+Corso --> "1" Istruttore
+Corso o-- "0..*" Iscritto : aggregazione
+Palestra *-- "0..*" Corso : composizione
+
+@enduml
+

@@ -1,0 +1,55 @@
+@startuml
+class Persona {
+    - nome : String
+    - email : String
+    + getNome() : String
+    + getEmail() : String
+}
+
+class Utente {
+    - idUtente : int
+    + prenotaLibro(libro: Libro, biblioteca: Biblioteca) : void
+    + annullaPrenotazione(libro: Libro, biblioteca: Biblioteca) : void
+}
+
+class StaffBiblioteca {
+    - idStaff : int
+    + aggiungiLibro(libro: Libro, biblioteca: Biblioteca) : void
+    + rimuoviLibro(libro: Libro, biblioteca: Biblioteca) : void
+}
+
+class Libro {
+    - titolo : String
+    - autore : String
+    - isbn : String
+    - disponibile : boolean
+    + isDisponibile() : boolean
+    + setDisponibile(disponibile : boolean) : void
+    + getTitolo() : String
+}
+
+class Prenotazione {
+    - utente : Utente
+    - libro : Libro
+    + Prenotazione(utente: Utente, libro: Libro)
+}
+
+class Biblioteca {
+    - elencoLibri : List<Libro>
+    - prenotazioni : List<Prenotazione>
+    + aggiungiLibro(libro: Libro) : void
+    + rimuoviLibro(libro: Libro) : void
+    + prenotaLibro(utente: Utente, libro: Libro) : boolean
+    + annullaPrenotazione(utente: Utente, libro: Libro) : boolean
+}
+
+Persona <|-- Utente
+Persona <|-- StaffBiblioteca
+
+Utente --> "0..*" Prenotazione
+Libro --> "0..*" Prenotazione
+Biblioteca --> "*" Libro
+Biblioteca --> "*" Prenotazione
+StaffBiblioteca --> Biblioteca : gestisce
+
+@enduml

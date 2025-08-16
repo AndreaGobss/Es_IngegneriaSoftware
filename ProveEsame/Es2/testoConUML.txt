@@ -1,0 +1,62 @@
+Un laboratorio di analisi cliniche vuole informatizzare la gestione dei pazienti, delle analisi e dei referti.
+Ogni Paziente ha un codice identificativo univoco, un nome e un’età.
+Il laboratorio esegue diversi tipi di Analisi (es. “emocromo”, “glicemia”, “tampone”), ciascuna identificata da un nome e una descrizione.
+
+Per ogni analisi effettuata su un paziente viene generato un Referto, che contiene:
+-->il paziente
+-->il tipo di analisi
+-->la data in cui è stata effettuata
+-->un valore numerico risultante (es. valore di glicemia)
+-->una breve nota (es. “valore nella norma”)
+
+Il laboratorio deve essere in grado di:
+-->aggiungere nuovi tipi di analisi
+-->registrare un nuovo referto
+-->ottenere tutti i referti relativi a un paziente
+-->ottenere tutti i referti di un certo tipo di analisi
+
+@startuml
+class Paziente {
+    - codice : int
+    - nome : String
+    - eta : int
+    + getCodice() : int
+    + getNome() : String
+    + getEta() : int
+}
+
+class Analisi {
+    - nome : String
+    - descrizione : String
+    + getNome() : String
+    + getDescrizione() : String
+}
+
+class Referto {
+    - data : String
+    - valore : double
+    - nota : String
+    - paziente : Paziente
+    - analisi : Analisi
+    + getPaziente() : Paziente
+    + getAnalisi() : Analisi
+    + getData() : String
+    + getValore() : double
+    + getNota() : String
+}
+
+class Laboratorio {
+    - tipiAnalisi : List<Analisi>
+    - referti : List<Referto>
+    + aggiungiAnalisi(analisi: Analisi) : void
+    + registraReferto(referto: Referto) : void
+    + getRefertiPerPaziente(p: Paziente) : List<Referto>
+    + getRefertiPerAnalisi(a: Analisi) : List<Referto>
+}
+
+Referto --> Paziente
+Referto --> Analisi
+Laboratorio *-- "0..*" Analisi : composizione
+Laboratorio *-- "0..*" Referto : composizione
+
+@enduml

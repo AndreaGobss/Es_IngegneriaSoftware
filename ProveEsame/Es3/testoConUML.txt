@@ -1,0 +1,99 @@
+Un sistema software deve gestire il noleggio di film da parte dei 
+clienti di un videonoleggio.
+Ogni film ha un codice identificativo, un titolo, un genere 
+(es. Azione, Commedia, ecc.) e una disponibilità (booleano che 
+indica se è disponibile per il noleggio).
+
+Ogni cliente ha un codice cliente, un nome e una email.
+Un cliente può noleggiare più film contemporaneamente, 
+ma non può noleggiare lo stesso film due volte senza restituirlo prima.
+
+Ogni noleggio registra:
+-->Il cliente che ha preso il film
+-->Il film noleggiato
+-->La data di inizio noleggio
+-->Un flag booleano che indica se il film è stato restituito
+
+Il sistema gestisce anche membri dello staff, che sono gli unici autorizzati a:
+-->Aggiungere un nuovo film al sistema
+-->Rimuovere un film dal catalogo, a patto che non sia attualmente noleggiato
+
+Ogni membro dello staff ha un id, un nome, e un campo ruolo 
+(es. "Impiegato", "Manager", ecc.).
+
+Funzionalità richieste
+-->Registrare un nuovo film (solo tramite uno Staff).
+-->Rimuovere un film (solo tramite Staff, e solo se il film non è in uso).
+-->Registrare un nuovo cliente.
+-->Noleggiare un film a un cliente, solo se:
+    -->Il film è disponibile
+    -->Il cliente non lo ha già noleggiato senza restituirlo
+-->Restituire un film, dato il cliente e il film.
+-->Stampare tutti i film attualmente noleggiati da un cliente
+
+@startuml
+
+abstract class Persona {
+    - nome : String
+    - email : String
+    + getNome() : String
+    + getEmail() : String
+    + toString() : String
+}
+
+class Cliente {
+    - codiceCliente : int
+    + getCodiceCliente() : int
+}
+Cliente --|> Persona
+
+class Staff {
+    - id : int
+    - ruolo : String
+    + getId() : int
+    + getRuolo() : String
+}
+Staff --|> Persona
+
+class Film {
+    - codice : int
+    - titolo : String
+    - genere : String
+    - disponibile : boolean
+    + getCodice() : int
+    + getTitolo() : String
+    + isDisponibile() : boolean
+    + setDisponibile(disponibile : boolean)
+    + toString() : String
+}
+
+class Noleggio {
+    - cliente : Cliente
+    - film : Film
+    - dataInizio : LocalDate
+    - restituito : boolean
+    + getCliente() : Cliente
+    + getFilm() : Film
+    + isRestituito() : boolean
+    + restituisci() : void
+}
+Noleggio *-- Cliente
+Noleggio *-- Film
+
+class SistemaNoleggio {
+    - filmDisponibili : List<Film>
+    - clienti : List<Cliente>
+    - noleggi : List<Noleggio>
+    + aggiungiFilm(film : Film, staff : Staff)
+    + rimuoviFilm(film : Film, staff : Staff)
+    + registraCliente(cliente : Cliente)
+    + noleggiaFilm(cliente : Cliente, film : Film)
+    + restituisciFilm(cliente : Cliente, film : Film)
+    + stampaFilmNoleggiatiDa(cliente : Cliente)
+}
+
+SistemaNoleggio o-- Film
+SistemaNoleggio o-- Cliente
+SistemaNoleggio o-- Noleggio
+
+@enduml

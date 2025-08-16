@@ -1,0 +1,85 @@
+Progetta un sistema software per la gestione delle prenotazioni  dei tavoli 
+in un ristorante. Il sistema sarà utilizzato sia dai  clienti (per prenotare),
+sia dallo staff (per gestire i tavoli  e le prenotazioni).
+
+
+Diagramma UML delle classi:
+-->Definire almeno le seguenti classi principali:
+    -->Cliente, Tavolo, Prenotazione, StaffRistorante, Ristorante
+-->Introdurre una superclasse astratta Persona,  con attributi comuni come nome, telefono
+-->Le classi Cliente e StaffRistorante devono estendere Persona
+-->Lo staff può aggiungere e rimuovere tavoli
+-->Un cliente può effettuare più prenotazioni, e ogni tavolo può essere prenotato 
+   in determinati orari
+
+Diagramma UML delle attività:
+Descrivere il processo di prenotazione da parte di un cliente, 
+con verifica disponibilità, conferma e assegnazione del tavolo
+
+Implementazione Java
+Crea le classi Cliente, Tavolo, Prenotazione, StaffRistorante, Ristorante, 
+estendendo Persona dove richiesto
+
+La classe Ristorante deve gestire un elenco di tavoli e prenotazioni
+
+Implementa i metodi:
+-->prenotaTavolo(Cliente cliente, Tavolo tavolo, String dataOra)
+-->annullaPrenotazione(Cliente cliente, Tavolo tavolo, String dataOra)
+
+Lo staff deve avere metodi per aggiungere e rimuovere tavoli
+
+Scrivere una classe Main per testare il sistema con uno scenario esemplificativo
+
+@startuml
+class Persona {
+    - nome : String
+    - telefono : String
+    + Persona(nome : String, telefono : String)
+    + getNome() : String
+}
+
+class Cliente {
+    + Cliente(nome : String, telefono : String)
+}
+
+class Staff {
+    - numeroStaff : int
+    + Staff(nome : String, telefono : String, numeroStaff : int)
+    + aggiungiTavolo(listaTavoli : List<Tavolo>, tavolo : Tavolo) : void
+    + rimuoviTavolo(listaTavoli : List<Tavolo>, tavolo : Tavolo) : void
+}
+
+class Tavolo {
+    - numeroTavolo : int
+    + Tavolo(numeroTavolo : int)
+    + getTavolo() : int
+    + equals(obj : Object) : boolean
+}
+
+class Prenotazione {
+    - prenotante : Cliente
+    - numeroTavolo : Tavolo
+    - oraPrenotazione : String
+    + Prenotazione(prenotante : Cliente, numeroTavolo : Tavolo, oraPrenotazione : String)
+    + getPrenotante() : Cliente
+    + getTavolo() : Tavolo
+    + getOraPrenotazione() : String
+}
+
+class Ristorante {
+    - clienti : List<Cliente>
+    - tavoli : List<Tavolo>
+    - prenotazioni : List<Prenotazione>
+    + Ristorante()
+    + aggiungiPrenotazione(cliente : Cliente, tavolo : Tavolo, oraPrenotazione : String) : boolean
+    + annullaPrenotazione(cliente : Cliente, tavolo : Tavolo, oraPrenotazione : String) : boolean
+}
+
+Persona <|-- Cliente
+Persona <|-- Staff
+Ristorante o-- Cliente : composizione
+Ristorante o-- Tavolo : composizione
+Ristorante o-- Prenotazione : composizione
+Prenotazione *-- Cliente : aggregazione
+Prenotazione *-- Tavolo : aggregazione
+Staff --> Tavolo : gestione
